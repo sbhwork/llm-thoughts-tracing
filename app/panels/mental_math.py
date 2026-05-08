@@ -8,6 +8,8 @@ from data.content import (
     MENTAL_MATH_ADDEND_A_LABEL,
     MENTAL_MATH_ADDEND_B_LABEL,
     MENTAL_MATH_CALLOUT,
+    MENTAL_MATH_DEFAULT_A,
+    MENTAL_MATH_DEFAULT_B,
     MENTAL_MATH_COMBINED_LABEL,
     MENTAL_MATH_CONTRAST_NOTE,
     MENTAL_MATH_METRIC_ROUGH_CAPTION,
@@ -29,6 +31,7 @@ def render() -> None:
             MENTAL_MATH_ADDEND_A_LABEL,
             min_value=-10**9,
             max_value=10**9,
+            value=int(MENTAL_MATH_DEFAULT_A),
             step=1,
             key="mental_math_a",
         )
@@ -38,6 +41,7 @@ def render() -> None:
             MENTAL_MATH_ADDEND_B_LABEL,
             min_value=-10**9,
             max_value=10**9,
+            value=int(MENTAL_MATH_DEFAULT_B),
             step=1,
             key="mental_math_b",
         )

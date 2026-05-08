@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import streamlit as st
 
-from config import NAV_ACTIVE_SUFFIX
 from data.content import (
     REASONING_FAITHFUL_ANSWER,
     REASONING_FAITHFUL_CALLOUT,
@@ -29,14 +28,12 @@ def render() -> None:
     rc = st.columns(len(REASONING_MODES))
     for col, mode in zip(rc, REASONING_MODES):
         with col:
-            base = REASONING_MODE_LABELS[mode]
-            shown = f"{base}{NAV_ACTIVE_SUFFIX}" if st.session_state["reasoning_mode"] == mode else base
             st.button(
-                shown,
+                REASONING_MODE_LABELS[mode],
                 key=f"reason_{mode}",
                 on_click=set_reasoning_mode,
                 args=(mode,),
-                type="secondary",
+                type="primary" if st.session_state["reasoning_mode"] == mode else "secondary",
                 use_container_width=True,
             )
 

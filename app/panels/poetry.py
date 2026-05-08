@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import streamlit as st
 
-from config import NAV_ACTIVE_SUFFIX
 from data.content import (
     POETRY_CALLOUT,
     POETRY_FIRST_LINE,
@@ -27,14 +26,12 @@ def render() -> None:
     mc = st.columns(len(POETRY_MODES))
     for col, mode in zip(mc, POETRY_MODES):
         with col:
-            base = POETRY_MODE_LABELS[mode]
-            shown = f"{base}{NAV_ACTIVE_SUFFIX}" if st.session_state["poetry_mode"] == mode else base
             st.button(
-                shown,
+                POETRY_MODE_LABELS[mode],
                 key=f"poetry_{mode}",
                 on_click=set_poetry_mode,
                 args=(mode,),
-                type="secondary",
+                type="primary" if st.session_state["poetry_mode"] == mode else "secondary",
                 use_container_width=True,
             )
 

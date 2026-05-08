@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from config import NAV_ACTIVE_SUFFIX, PAGE_LAYOUT, PAGE_TITLE, PANEL_ORDER
+from config import PAGE_LAYOUT, PAGE_TITLE, PANEL_ORDER
 from components.layout import render_panel_header, render_sidebar
 from data.content import MAIN_INTRO_CAPTION
 from panels.hallucination import render as render_hallucination
@@ -26,14 +26,12 @@ st.caption(MAIN_INTRO_CAPTION)
 nav_cols = st.columns(len(PANEL_ORDER))
 for col, (panel_id, label) in zip(nav_cols, PANEL_ORDER):
     with col:
-        # Stable `type` on every rerun — toggling primary/secondary breaks click handling.
-        shown = f"{label}{NAV_ACTIVE_SUFFIX}" if get_active_panel() == panel_id else label
         st.button(
-            shown,
+            label,
             key=f"nav_{panel_id}",
             on_click=set_active_panel,
             args=(panel_id,),
-            type="secondary",
+            type="primary" if get_active_panel() == panel_id else "secondary",
             use_container_width=True,
         )
 

@@ -3,9 +3,6 @@
 PAGE_TITLE = "AI Thought Tracer"
 PAGE_LAYOUT = "wide"
 
-# Appended to the active main-nav label (stable button `type` avoids mis-clicks).
-NAV_ACTIVE_SUFFIX = " ·"
-
 ANTHROPIC_RESEARCH_URL = "https://www.anthropic.com/research/tracing-thoughts-language-model"
 
 PANEL_ORDER: list[tuple[str, str]] = [
