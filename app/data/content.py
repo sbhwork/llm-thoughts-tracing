@@ -10,7 +10,7 @@ from typing import Literal
 # --- Global / layout ---
 
 MAIN_INTRO_CAPTION = (
-    "Interactive case studies from Anthropic’s interpretability work — for reading-group discussion."
+    "Interactive case studies from Anthropic’s paper on tracing the thoughts of a large language model."
 )
 
 ABOUT_SUMMARY_SENTENCES = (
