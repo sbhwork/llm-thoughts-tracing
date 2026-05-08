@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import streamlit as st
 
+from config import NAV_ACTIVE_SUFFIX
 from data.content import (
     MULTILINGUAL_CALLOUT,
     MULTILINGUAL_FEATURES,
@@ -15,6 +16,7 @@ from data.content import (
     UI_LABELS,
 )
 from components.ui import render_callout, render_discussion_prompts, render_indicator_card
+from utils.state import set_multilingual_lang
 
 
 def render() -> None:
@@ -22,13 +24,16 @@ def render() -> None:
     cols = st.columns(len(langs))
     for col, code in zip(cols, langs):
         with col:
-            if st.button(
-                MULTILINGUAL_LABELS[code],
+            base = MULTILINGUAL_LABELS[code]
+            shown = f"{base}{NAV_ACTIVE_SUFFIX}" if st.session_state["multilingual_lang"] == code else base
+            st.button(
+                shown,
                 key=f"lang_{code}",
-                type="primary" if st.session_state["multilingual_lang"] == code else "secondary",
+                on_click=set_multilingual_lang,
+                args=(code,),
+                type="secondary",
                 use_container_width=True,
-            ):
-                st.session_state["multilingual_lang"] = code
+            )
 
     lang = st.session_state["multilingual_lang"]
 

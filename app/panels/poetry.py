@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import streamlit as st
 
+from config import NAV_ACTIVE_SUFFIX
 from data.content import (
     POETRY_CALLOUT,
     POETRY_FIRST_LINE,
@@ -15,6 +16,7 @@ from data.content import (
     UI_LABELS,
 )
 from components.ui import render_callout, render_discussion_prompts
+from utils.state import set_poetry_mode
 
 
 def render() -> None:
@@ -25,13 +27,16 @@ def render() -> None:
     mc = st.columns(len(POETRY_MODES))
     for col, mode in zip(mc, POETRY_MODES):
         with col:
-            if st.button(
-                POETRY_MODE_LABELS[mode],
+            base = POETRY_MODE_LABELS[mode]
+            shown = f"{base}{NAV_ACTIVE_SUFFIX}" if st.session_state["poetry_mode"] == mode else base
+            st.button(
+                shown,
                 key=f"poetry_{mode}",
-                type="primary" if st.session_state["poetry_mode"] == mode else "secondary",
+                on_click=set_poetry_mode,
+                args=(mode,),
+                type="secondary",
                 use_container_width=True,
-            ):
-                st.session_state["poetry_mode"] = mode
+            )
 
     scenario = POETRY_SCENARIOS[st.session_state["poetry_mode"]]
     o1, o2 = st.columns(2)

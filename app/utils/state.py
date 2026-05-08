@@ -34,6 +34,18 @@ def set_active_panel(panel_id: str) -> None:
     st.session_state["active_panel"] = panel_id
 
 
+def set_multilingual_lang(code: str) -> None:
+    st.session_state["multilingual_lang"] = code
+
+
+def set_poetry_mode(mode: str) -> None:
+    st.session_state["poetry_mode"] = mode
+
+
+def set_reasoning_mode(mode: str) -> None:
+    st.session_state["reasoning_mode"] = mode
+
+
 def touch_current_panel_visit() -> None:
     panel_id = get_active_panel()
     visited: list[str] = st.session_state["visited_panels"]
